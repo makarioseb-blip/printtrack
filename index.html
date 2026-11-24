@@ -9,25 +9,32 @@
 <title>متابعة طباعة المشروعات المختلفة</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef2f9;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e5eaf3;--soft:#f1f5f9;--brand:#1e3a8a;--acc:#4f46e5;--g:#059669;--b:#e11d48;--w:#d97706;--r:16px;--sh:0 1px 2px rgba(15,23,42,.05),0 10px 26px -12px rgba(15,23,42,.16)}
-@media(prefers-color-scheme:dark){:root{--bg:#0b1220;--card:#131c2e;--ink:#e5e7eb;--mut:#9ca3af;--line:#243049;--soft:#18233a;--brand:#7ab8ee;--acc:#93a4ff}}
+:root{--bg:#edf2f7;--card:#fff;--ink:#13233c;--mut:#5b6f88;--line:#dbe6f0;--soft:#e8f0f7;--brand:#0e7490;--acc:#0d9488;--g:#0e9f6e;--b:#e11d48;--w:#d97706;--r:18px;--sh:0 1px 2px rgba(19,35,60,.05),0 12px 30px -14px rgba(19,35,60,.18)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1524;--card:#122035;--ink:#e6ecf4;--mut:#94a5bc;--line:#22344e;--soft:#172740;--brand:#67e8f9;--acc:#2dd4bf}}
 *{box-sizing:border-box}
 body{margin:0;font-family:Cairo,Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh}
 button,input,select,textarea{font:inherit;font-size:14px}
 button{cursor:pointer}
 .wrap{max-width:1200px;margin:0 auto;padding:0 12px}
-header{background:linear-gradient(120deg,#1e3a8a,#4f46e5 55%,#0891b2);color:#fff;padding:14px 0 56px}
-.hd{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+header{background:linear-gradient(120deg,#0f766e,#0d9488 45%,#0891b2 78%,#0369a1);color:#fff;padding:14px 0 56px;position:relative;overflow:hidden}
+header::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 65%);top:-160px;left:-80px}
+header::after{content:"";position:absolute;width:250px;height:250px;border-radius:50%;border:42px solid rgba(255,255,255,.08);bottom:-180px;right:7%}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
 .hd h1{margin:0;font-size:20px;font-weight:800}.hd p{margin:0;font-size:12px;opacity:.85}
 .tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .chipu{background:rgba(255,255,255,.18);padding:4px 12px;border-radius:99px;font-size:13px;font-weight:700}
-.btn{border:0;border-radius:11px;padding:8px 14px;font-weight:700;background:var(--acc);color:#fff;display:inline-flex;gap:6px;align-items:center;justify-content:center}
+.btn{border:0;border-radius:12px;padding:8px 14px;font-weight:700;background:linear-gradient(135deg,var(--acc),var(--brand));color:#fff;display:inline-flex;gap:6px;align-items:center;justify-content:center}
 .btn:active{transform:scale(.97)}.btn:disabled{opacity:.5}
 .btn.l{background:var(--soft);color:var(--ink)}.btn.g{background:var(--g)}.btn.r{background:#fff1f2;color:#be123c}.btn.gh{background:rgba(255,255,255,.2)}.btn.sm{padding:4px 10px;font-size:12px;border-radius:9px}
-.tabs{margin-top:-38px;background:var(--card);border-radius:16px;box-shadow:var(--sh);padding:5px;display:flex;gap:3px;overflow-x:auto;scrollbar-width:none}
+.tabs{margin-top:-38px;background:var(--card);border-radius:16px;box-shadow:var(--sh);padding:5px;display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;position:relative;z-index:2}
 .tab{flex:1 0 auto;border:0;background:none;color:var(--mut);padding:9px 14px;border-radius:12px;font-weight:700;white-space:nowrap}
-.tab.on{background:var(--acc);color:#fff}
+.tab.on{background:linear-gradient(135deg,var(--acc),var(--brand));color:#fff;box-shadow:0 4px 12px -4px var(--acc)}
+.ic{width:18px;height:18px;flex:none;vertical-align:-3px}
+.tab .ic{width:17px;height:17px}
+.hd h1 .ic{width:24px;height:24px;vertical-align:-5px}
+.chipu .ic{width:15px;height:15px;vertical-align:-2px}
 main{padding:18px 0 40px;display:grid;gap:16px}
+main>*{min-width:0}
 .card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:16px}
 .card h3{margin:0 0 10px;font-size:16px;font-weight:800}
 .st{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}.st h3{margin:0}
@@ -85,12 +92,26 @@ label.gd input{border-color:#a7f3d0}label.bd input{border-color:#fecdd3}label.wd
 .seg{display:inline-flex;background:var(--soft);border-radius:10px;padding:3px}.seg button{border:0;background:none;padding:3px 10px;border-radius:8px;font-weight:700;color:var(--mut)}.seg button.on{background:var(--card);color:var(--acc)}
 .ltr{direction:ltr;unicode-bidi:embed}
 svg.ch{width:100%;height:auto;direction:ltr}svg.ch text{fill:var(--mut);font-size:11px}
-@media print{header,.tabs,.acts,.noprint,#toast{display:none!important}body{background:#fff}.card{box-shadow:none;border:1px solid #ddd}}
+@media(max-width:640px){
+ input,select,textarea{font-size:16px}
+ .fg{grid-template-columns:1fr!important}
+ .sg{grid-template-columns:repeat(2,1fr)!important}
+ .pv{grid-template-columns:repeat(2,1fr)}
+ .kp{grid-template-columns:repeat(2,1fr)}
+ .md{padding:14px;border-radius:16px}
+ .hd h1{font-size:17px}.hd p{font-size:11px}
+ header{padding:10px 0 48px}
+ table{font-size:12px}
+ .btn{padding:8px 12px}
+ .acts{flex-wrap:wrap}
+}
+.print-title{display:none}
+@media print{header,.tabs,.acts,.noprint,#toast,.btn{display:none!important}body{background:#fff}.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}.print-title{display:block!important;text-align:center;margin:0 0 14px}.print-title h2{margin:0 0 4px;font-size:19px}}
 </style>
 </head>
 <body>
 <header><div class="wrap hd">
- <div><h1>🏭 متابعة طباعة المشروعات المختلفة</h1><p>تتبع أوامر الفئات الجديدة من أول مرحلة طباعة حتى التسليم للتشطيب (سليم · معيب · تالف)</p></div>
+ <div><h1><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 21h17"/><path d="M5 21V9.8l4.5 2.7V9.8l4.5 2.7V9.8l4.5 2.7V21"/><path d="M16 9.5V4h2.5v6.2"/><path d="M8 17.5h1.6M12 17.5h1.6"/></svg> متابعة طباعة المشروعات المختلفة</h1><p>تتبع أوامر الفئات الجديدة من أول مرحلة طباعة حتى التسليم للتشطيب (سليم · معيب · تالف)</p></div>
  <div class="tools" id="tools"></div>
 </div></header>
 <div class="wrap"><nav class="tabs" id="tabs"></nav></div>
@@ -182,7 +203,7 @@ async function doLogin(){
   setTok(await r.json());await pull();
   if(!Object.keys(S.users||{}).length){closeModal();const nm=window.prompt("أول استخدام للنظام: اكتب اسمك بالعربي — حسابك هيكون مدير النظام")||"";const un2=tok.email.split("@")[0];S.users[safeKey(un2)]={name:nm.trim()||un2,role:"admin",created:new Date().toISOString()};commit({users:S.users})}
   if(!resolveMe()){logout();openModal("<h3>⛔ الحساب غير مفعّل</h3><p>اسم المستخدم ده ملهوش صلاحية دخول. تواصل مع مدير النظام عشان يضيف حسابك.</p><div class='acts'><button class='btn' onclick='closeModal()'>حسناً</button></div>");return}
-  closeModal();addLog("تسجيل دخول");render();toast("مرحباً "+me.name,"ok")}
+  closeModal();addLog("تسجيل دخول");render();toast("مرحباً "+me.name,"ok");maybeTour()}
  catch(x){e.textContent="تعذر الاتصال بالإنترنت"}
 }
 function logout(){tok=null;me=null;ss("pt_tok",null);pending={};S=blank();render()}
@@ -231,7 +252,7 @@ function validate(o,ents,dels){
 }
 const curStage=o=>{const s=stagesOf(o);return s.find(x=>x.state!=="done")||null};
 function progress(o){const c=chain(o),u=num(o.units);return u>0?Math.min(100,Math.round(c.last.used/u*100)):0}
-function place(o){if(o.status==="done")return"✔ مكتمل ومُسلَّم";const c=curStage(o);if(!c)return"🚚 جاهز للتسليم للتشطيب";return"📍 "+stName(c)+" (خط "+c.line+")"}
+function place(o){if(o.status==="done")return"✔ مكتمل ومُسلَّم";if(o.closed)return"🔒 مقفول — اكتملت كميته";const c=curStage(o);if(!c)return"🚚 جاهز للتسليم للتشطيب";return"📍 "+stName(c)+" (خط "+c.line+")"}
 const isLate=o=>o.status!=="done"&&o.due&&o.due<todayKey();
 function denomOf(o){return S.denoms[o.denom]||{name:o.denomName||"—",units:0}}
 const dKey=n=>normD(n).trim().replace(/\s+/g," ").toLowerCase();
@@ -281,19 +302,39 @@ function go(v){VIEW=v;CUR=null;EDIT=null;render();window.scrollTo({top:0})}
 function openOrder(id){VIEW="order";CUR=id;EDIT=null;render();window.scrollTo({top:0})}
 function ferr(t){const e=$("ferr");if(e)e.textContent=t;return false}
 
+/* ================== الأيقونات ================== */
+const IC={};
+(function(){const w=h=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+h+'</svg>';
+IC.dash=w('<rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/>');
+IC.ord=w('<rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 4.5V3.6A1.6 1.6 0 0 1 10.6 2h2.8A1.6 1.6 0 0 1 15 3.6v.9"/><path d="M9 11h6M9 15h4"/>');
+IC.mac=w('<circle cx="12" cy="12" r="3.1"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2L17 7M7 17l-1.8 1.8"/>');
+IC.rep=w('<path d="M4 20h16"/><rect x="5.5" y="11" width="3.6" height="9" rx="1"/><rect x="10.2" y="5.5" width="3.6" height="14.5" rx="1"/><rect x="14.9" y="14" width="3.6" height="6" rx="1"/>');
+IC.den=w('<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.6v.01M17.8 14.4v.01"/>');
+IC.ops=w('<path d="M4 7h2.9M11.1 7H20M4 12h8.9M17.1 12H20M4 17h1.9M10.1 17H20"/><circle cx="9" cy="7" r="2.1"/><circle cx="15" cy="12" r="2.1"/><circle cx="8" cy="17" r="2.1"/>');
+IC.dat=w('<ellipse cx="12" cy="5.4" rx="7.5" ry="2.7"/><path d="M4.5 5.4v6.3c0 1.5 3.4 2.7 7.5 2.7s7.5-1.2 7.5-2.7V5.4"/><path d="M4.5 11.7V18c0 1.5 3.4 2.7 7.5 2.7s7.5-1.2 7.5-2.7v-6.3"/>');
+IC.prn=w('<path d="M7 8V3.5h10V8"/><rect x="3.5" y="8" width="17" height="7.5" rx="2"/><path d="M7 13h10v7H7z"/><circle cx="17.2" cy="11" r=".9" fill="currentColor" stroke="none"/>');
+IC.help=w('<circle cx="12" cy="12" r="8.6"/><path d="M9.6 9.3a2.6 2.6 0 1 1 3.7 2.4c-.8.4-1.3.9-1.3 1.8v.4"/><circle cx="12" cy="16.9" r="1" fill="currentColor" stroke="none"/>');
+IC.key=w('<circle cx="8" cy="14.5" r="4"/><path d="M11 11.5L18.5 4M16 6.5l2.4 2.4M13.6 8.9l2.4 2.4"/>');
+IC.users=w('<circle cx="9.5" cy="8.5" r="3.2"/><path d="M4 19.2c.5-3.1 2.8-4.8 5.5-4.8s5 1.7 5.5 4.8"/><path d="M15.3 5.6a3.2 3.2 0 0 1 0 5.9M17.6 14.8c1.5.7 2.6 2 3 4"/>');
+IC.lock=w('<rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V7.9a4 4 0 0 1 8 0v2.6"/>');
+IC.out=w('<path d="M13.5 4H6.8A1.8 1.8 0 0 0 5 5.8v12.4A1.8 1.8 0 0 0 6.8 20h6.7"/><path d="M10.5 12h10M17 8.6l3.4 3.4-3.4 3.4"/>');
+IC.user=w('<circle cx="12" cy="8" r="3.4"/><path d="M5.2 19.8c.8-3.5 3.5-5.3 6.8-5.3s6 1.8 6.8 5.3"/>');
+IC.disk=w('<path d="M5 4.5h10.5L19 8v11.5H5z"/><path d="M8 4.5V9h6.5V4.5"/><rect x="8" y="13" width="8" height="6.5" rx="1"/>');
+})();
 /* ================== الرسم ================== */
 function render(){
- $("tools").innerHTML=(CLOUD?'<span class="chipu">'+(me?"👤 "+esc(me.name)+" · "+(ROLES[me.role]||""):"غير مسجل")+"</span>":'<span class="chipu">💾 محلي</span>')+
-  (CLOUD&&me?'<button class="btn gh sm" title="تغيير كلمة المرور" onclick="pwModal()">🔑</button>':"")+
-  (CLOUD&&me&&me.role==="admin"?'<button class="btn gh sm" onclick="usersModal()">👥 المستخدمون</button>':"")+
-  (CLOUD?(me?'<button class="btn gh sm" onclick="logout()">خروج</button>':'<button class="btn gh sm" onclick="loginModal()">🔐 دخول</button>'):"")+
-  '<button class="btn gh sm" onclick="window.print()">🖨️ طباعة</button>';
- const T=[["dash","📊 لوحة المتابعة"],["orders","📦 الأوامر"],["machines","⚙️ الماكينات"],["denoms","💵 الفئات"],["ops","🛠️ التشغيل"],["data","💾 البيانات"]];
+ $("tools").innerHTML=(CLOUD?'<span class="chipu">'+(me?IC.user+" "+esc(me.name)+" · "+(ROLES[me.role]||""):"غير مسجل")+"</span>":'<span class="chipu">'+IC.disk+' محلي</span>')+
+  (CLOUD&&me?'<button class="btn gh sm" title="تغيير كلمة المرور" onclick="pwModal()">'+IC.key+'</button>':"")+
+  (CLOUD&&me&&me.role==="admin"?'<button class="btn gh sm" onclick="usersModal()">'+IC.users+' المستخدمون</button>':"")+
+  (CLOUD?(me?'<button class="btn gh sm" onclick="logout()">'+IC.out+' خروج</button>':'<button class="btn gh sm" onclick="loginModal()">'+IC.lock+' دخول</button>'):"")+
+  '<button class="btn gh sm" title="شرح استخدام النظام" onclick="tour(0)">'+IC.help+'</button>'+
+  '<button class="btn gh sm" onclick="window.print()">'+IC.prn+' طباعة</button>';
+ const T=[["dash",IC.dash+" لوحة المتابعة"],["orders",IC.ord+" الأوامر"],["machines",IC.mac+" الماكينات"],["reports",IC.rep+" التقارير"],["denoms",IC.den+" الفئات"],["ops",IC.ops+" التشغيل"],["data",IC.dat+" البيانات"]];
  $("tabs").innerHTML=T.map(t=>'<button class="tab'+((VIEW===t[0]||(VIEW==="order"&&t[0]==="orders"))?" on":"")+'" onclick="go(\''+t[0]+'\')">'+t[1]+"</button>").join("");
  const v=$("view");
  if(CLOUD&&!me){v.innerHTML='<div class="card"><h3>🔒 تسجيل الدخول مطلوب</h3><p class="mut">البيانات متاحة للمستخدمين المسجلين فقط.</p><button class="btn" onclick="loginModal()">تسجيل الدخول</button></div>';return}
  if(VIEW==="order"&&!S.orders[CUR])VIEW="orders";
- v.innerHTML=VIEW==="dash"?dashV():VIEW==="orders"?ordersV():VIEW==="order"?orderV(S.orders[CUR]):VIEW==="machines"?machV():VIEW==="denoms"?denomV():VIEW==="ops"?opsV():dataV();
+ v.innerHTML=VIEW==="dash"?dashV():VIEW==="orders"?ordersV():VIEW==="order"?orderV(S.orders[CUR]):VIEW==="machines"?machV():VIEW==="reports"?reportsV():VIEW==="denoms"?denomV():VIEW==="ops"?opsV():dataV();
  if(VIEW==="order")initForms()
 }
 function loginModal(){openModal("<h3>🔐 تسجيل الدخول</h3><form onsubmit='doLogin();return false'><div class='fg' style='grid-template-columns:1fr'><label class='f'>اسم المستخدم<input type='text' id='lu' class='ltr' autocapitalize='off' autocomplete='username'></label><label class='f'>كلمة المرور<input type='password' id='lp' class='ltr' autocomplete='current-password'></label></div><div class='err' id='lerr'></div><div class='acts'><button class='btn' type='submit'>دخول</button><button type='button' class='btn l' onclick='closeModal()'>إلغاء</button></div></form>")}
@@ -335,7 +376,7 @@ function pipeHTML(o){
 }
 function orderCard(o){
  const c=chain(o),p=progress(o),dn=denomOf(o);
- return'<div class="oc'+(o.status==="done"?" done":"")+'"><div class="oh"><b>'+esc(o.no)+'</b><span class="tag m">'+esc(dn.name)+'</span>'+(o.project?'<span class="tag">'+esc(o.project)+'</span>':"")+(isLate(o)?'<span class="tag late">⏰ متأخر</span>':"")+'</div>'+
+ return'<div class="oc'+(o.status==="done"?" done":"")+'"><div class="oh"><b>'+esc(o.no)+'</b><span class="tag m">'+esc(dn.name)+'</span>'+(o.project?'<span class="tag">'+esc(o.project)+'</span>':"")+(isLate(o)?'<span class="tag late">⏰ متأخر</span>':"")+(o.closed&&o.status!=="done"?'<span class="tag" style="background:#fef3c7;border-color:#fde68a;color:#92400e">🔒 مقفول</span>':"")+'</div>'+
   '<div class="mut">'+esc(place(o))+' · '+esc(MODES[o.mode].n)+'</div>'+pipeHTML(o)+
   '<div class="bar"><i style="width:'+p+'%"></i></div><div class="mut">'+p+'% من '+fmt(o.units)+' وحدة</div>'+
   '<div class="sg"><div class="g"><div class="l">سليم بآخر مرحلة</div><div class="v">'+fmt(c.last.g)+'</div></div><div class="b"><div class="l">معيب</div><div class="v">'+fmt(c.last.b)+'</div></div><div class="w"><div class="l">تالف (كل المراحل)</div><div class="v">'+fmt(c.wasteAll)+'</div></div><div><div class="l">سُلِّم للتشطيب</div><div class="v">'+fmt(c.dg+c.db)+'</div></div></div>'+
@@ -406,13 +447,15 @@ function saveOrder(id){
 
 /* ---------- صفحة الأمر ---------- */
 function orderV(o){
- const c=chain(o),dn=denomOf(o),f=modeF(o),st=stagesOf(o),ro=o.status==="done",ed=can()&&!ro,p=progress(o);
+ const c=chain(o),dn=denomOf(o),f=modeF(o),st=stagesOf(o),ro=o.status==="done",ed=can()&&!ro&&!o.closed,p=progress(o);
  const k=(l,v,col)=>'<div><div class="l">'+l+'</div><div class="v"'+(col?' style="color:'+col+'"':"")+'>'+v+"</div></div>";
- let h='<div class="card"><div class="st"><div><div class="oh"><b style="font-size:22px">'+esc(o.no)+'</b><span class="tag m">'+esc(dn.name)+'</span>'+(o.project?'<span class="tag">'+esc(o.project)+'</span>':"")+(isLate(o)?'<span class="tag late">⏰ متأخر</span>':"")+(ro?'<span class="tag ok">✔ مكتمل</span>':"")+'</div>'+
+ let h='<div class="card"><div class="st"><div><div class="oh"><b style="font-size:22px">'+esc(o.no)+'</b><span class="tag m">'+esc(dn.name)+'</span>'+(o.project?'<span class="tag">'+esc(o.project)+'</span>':"")+(isLate(o)?'<span class="tag late">⏰ متأخر</span>':"")+(ro?'<span class="tag ok">✔ مكتمل</span>':"")+(!ro&&o.closed?'<span class="tag" style="background:#fef3c7;border-color:#fde68a;color:#92400e">🔒 مقفول</span>':"")+'</div>'+
   '<div class="mut">'+esc(place(o))+' · الناتج المتوقع: <b>'+esc(MODES[o.mode].n)+'</b>'+(o.due?' · الموعد '+fmtDate(o.due):"")+'</div></div>'+
   '<div class="acts noprint" style="margin:0"><button class="btn l sm" onclick="go(\'orders\')">↩ القائمة</button>'+(canSuper()?'<button class="btn l sm" onclick="orderModal(\''+o.id+'\')">⚙️ تعديل</button>':"")+
+  (canSuper()&&!ro&&!o.closed&&p>=100?'<button class="btn sm" onclick="closeOrder(\''+o.id+'\')">🔒 إقفال الأمر</button>':"")+
+  (canSuper()&&!ro&&o.closed?'<button class="btn l sm" onclick="uncloseOrder(\''+o.id+'\')">🔓 فك الإقفال</button>':"")+
   (canSuper()&&!ro?'<button class="btn g sm" onclick="finishOrder(\''+o.id+'\')">✔ إنهاء الأمر</button>':(canSuper()&&ro?'<button class="btn l sm" onclick="reopenOrder(\''+o.id+'\')">إعادة فتح</button>':""))+
-  (canAdmin()?'<button class="btn r sm" onclick="delOrder(\''+o.id+'\')">🗑 حذف</button>':"")+'</div></div>'+
+  (canSuper()?'<button class="btn r sm" onclick="delOrder(\''+o.id+'\')">🗑 حذف</button>':"")+'</div></div>'+
   (o.notes?'<div class="mut">📝 '+esc(o.notes)+"</div>":"")+pipeHTML(o)+'<div class="bar"><i style="width:'+p+'%"></i></div>'+
   '<div class="pv">'+k("عدد وحدات الفئة",fmt(dn.units))+k("وحدات الأمر",fmt(o.units))+k("الخام المستلم",rcvOf(o).length?fmt(rawIn(o)):"—")+k("التقدم",p+"%")+
   k("سليم نهائي",fmt(c.last.g),"#059669")+k("معيب نهائي",fmt(c.last.b),"#e11d48")+k("تالف كلي",fmt(c.wasteAll),"#d97706")+k("بانتظار التسليم",fmt(c.fg+c.fb+c.fw))+"</div></div>";
@@ -422,6 +465,7 @@ function orderV(o){
   c.rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td class="l"><b>'+esc(STD[r.s.type].n)+'</b><small>'+esc(r.s.machine||"—")+" · خط "+esc(r.s.line)+'</small></td><td>'+(ed?'<select onchange="setState(\''+o.id+'\',\''+r.s.k+'\',this.value)">'+Object.keys(STL).map(x=>'<option value="'+x+'"'+(r.s.state===x?" selected":"")+">"+STL[x]+"</option>").join("")+"</select>":STL[r.s.state])+"</td><td>"+fmt(r.in)+'</td><td class="tg">'+fmt(r.g)+'</td><td class="tb">'+fmt(r.b)+'</td><td class="tw2">'+fmt(r.w)+"</td><td><b>"+fmt(r.avail)+"</b></td><td>"+pct(r.w,r.used)+"%</td>"+(ed?'<td><button class="btn l sm" onclick="stageModal(\''+o.id+'\',\''+r.s.k+'\')">✏️</button></td>':"")+"</tr>").join("")+"</tbody></table></div></div>";
 
  /* نموذج الإدخال */
+ if(!ed&&o.closed&&!ro)h+='<div class="card"><div class="al lo">🔒 <span>الأمر مقفول — اكتملت كميته ولا يمكن تسجيل إنتاج أو استلام خام جديد عليه. التسليم للتشطيب ما زال متاحاً أدناه.</span></div></div>';
  if(ed){
   const open=st.filter(s=>s.state!=="done");
   h+='<form class="card" id="ecard" onsubmit="saveEntry(\''+o.id+'\');return false"><div class="st"><h3 id="etitle">📝 تسجيل إنتاج مرحلة</h3><span class="mut">الحقول المتاحة حسب ناتج الأمر: '+esc(MODES[o.mode].n)+'</span></div><div class="fg">'+
@@ -464,7 +508,7 @@ function updPv(id){
  const after=r.avail-g-bb-w;
  b.innerHTML='<div><div class="l">الوارد للمرحلة</div><div class="v">'+fmt(r.in)+'</div></div><div><div class="l">المتاح قبل الحفظ</div><div class="v">'+fmt(r.avail)+'</div></div><div class="'+(after<0?"neg":"")+'"><div class="l">المتاح بعد الحفظ</div><div class="v">'+fmt(after)+'</div></div><div><div class="l">خارج للمرحلة التالية</div><div class="v">'+fmt(g+bb)+"</div></div>"
 }
-function setState(id,k,v){const o=S.orders[id];if(!STL[v]||!can())return;o.stages[k].state=v;commit({orders:{[id]:{stages:{[k]:{state:v}}}}});addLog("أمر "+o.no+": "+stName(o.stages[k])+" ← "+STL[v]);render()}
+function setState(id,k,v){const o=S.orders[id];if(!STL[v]||!can()||o.closed)return;o.stages[k].state=v;commit({orders:{[id]:{stages:{[k]:{state:v}}}}});addLog("أمر "+o.no+": "+stName(o.stages[k])+" ← "+STL[v]);render()}
 function stageModal(id,k){
  const o=S.orders[id],s=o.stages[k];
  openModal("<h3>✏️ تعديل المرحلة</h3><p class='mut'>"+esc(STD[s.type].n)+"</p><div class='fg' style='grid-template-columns:1fr 1fr'><label class='f'>الخط<select id='sg_ln' onchange='sgLn()'>"+[1,2,3,4].map(n=>"<option value='"+n+"'"+(String(s.line)===String(n)?" selected":"")+">خط "+n+"</option>").join("")+"</select></label><label class='f'>الماكينة<select id='sg_mc'></select></label></div><div class='acts'><button class='btn' onclick=\"saveStage('"+id+"','"+k+"')\">حفظ</button><button class='btn l' onclick='closeModal()'>إلغاء</button></div>");
@@ -475,7 +519,7 @@ function saveStage(id,k){const o=S.orders[id],ln=$("sg_ln").value,mc=$("sg_mc").
 
 /* ---------- حفظ حركة ---------- */
 function saveEntry(id,force){
- const o=S.orders[id];if(!o||!can())return;
+ const o=S.orders[id];if(!o||!can()||o.closed)return;
  const sk=$("e_st").value,date=$("e_dt").value,g=pn($("e_g").value),b=pn($("e_b").value),w=pn($("e_w").value);
  if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return ferr("اختر التاريخ");
  if([g,b,w].some(isNaN))return ferr("الأرقام يجب أن تكون صحيحة وغير سالبة (بدون كسور أو حروف)");
@@ -536,8 +580,10 @@ function finishOrder(id){
  const run=()=>{o.status="done";o.doneAt=new Date().toISOString();commit({orders:{[id]:{status:"done",doneAt:o.doneAt}}});addLog("إنهاء أمر "+o.no);render()};
  w.length?confirmBox(w.concat(["هل تريد إنهاء الأمر رغم ذلك؟"]),run,"إنهاء"):run()
 }
+function closeOrder(id){if(!canSuper())return;const o=S.orders[id];confirmBox("إقفال الأمر "+o.no+"؟ لن يمكن تسجيل إنتاج أو استلام خام جديد عليه، وسيظل التسليم للتشطيب متاحاً.",()=>{o.closed=true;o.closedAt=new Date().toISOString();commit({orders:{[id]:{closed:true,closedAt:o.closedAt}}});addLog("إقفال أمر "+o.no);render();toast("تم إقفال الأمر ✓","ok")},"إقفال")}
+function uncloseOrder(id){if(!canSuper())return;const o=S.orders[id];o.closed=false;delete o.closedAt;commit({orders:{[id]:{closed:null,closedAt:null}}});addLog("فك إقفال أمر "+o.no);render()}
 function reopenOrder(id){if(!canSuper())return;const o=S.orders[id];o.status="active";commit({orders:{[id]:{status:"active"}}});addLog("إعادة فتح أمر "+o.no);render()}
-function delOrder(id){if(!canAdmin())return;const o=S.orders[id];confirmBox("حذف الأمر "+o.no+" نهائياً مع كل حركاته؟ (تُحفظ نسخة للاسترجاع من «البيانات»)",()=>{saveRestore("قبل حذف الأمر "+o.no);delete S.orders[id];commit({orders:{[id]:null}});addLog("حذف أمر "+o.no);VIEW="orders";render()},"حذف نهائي")}
+function delOrder(id){if(!canSuper())return;const o=S.orders[id];confirmBox("حذف الأمر "+o.no+" نهائياً مع كل حركاته؟ (تُحفظ نسخة للاسترجاع من «البيانات»)",()=>{saveRestore("قبل حذف الأمر "+o.no);delete S.orders[id];commit({orders:{[id]:null}});addLog("حذف أمر "+o.no);VIEW="orders";render()},"حذف نهائي")}
 
 /* ---------- الماكينات ---------- */
 function machV(){
@@ -585,6 +631,84 @@ function setAtt(f,v){if(!can())return;const td=todayKey();S.att[td]=S.att[td]||{
 function setMt(k,f,v){if(!can())return;S.maint[k]=S.maint[k]||{};S.maint[k][f]=v;commit({maint:{[k]:{[f]:v}}});addLog("صيانة "+k+": "+f)}
 let hoT;function setHo(v){if(!can())return;S.handover=v;S.handoverAt=new Date().toISOString();S.handoverBy=who();clearTimeout(hoT);hoT=setTimeout(()=>commit({handover:v,handoverAt:S.handoverAt,handoverBy:S.handoverBy}),400)}
 
+/* ---------- التقارير ---------- */
+let REP={type:"mach",line:3,mach:LINES[3][0],from:addDays(todayKey(),-6),to:todayKey()};
+const allMach=()=>Object.keys(LINES).flatMap(ln=>LINES[ln].map(m=>({ln,m})));
+const repOk=e=>e.date>=REP.from&&e.date<=REP.to;
+function repEntries(pred){const out=[];orders().forEach(o=>{const dn=denomOf(o).name;entriesOf(o).forEach(e=>{const s=o.stages[e.stage]||{};if(repOk(e)&&pred(o,s,e))out.push({o,s,e,dn})})});return out}
+function machAgg(m){const es=repEntries((o,s)=>s.machine===m);let g=0,b=0,w=0;es.forEach(x=>{g+=x.e.g||0;b+=x.e.b||0;w+=x.e.w||0});return{g,b,w,n:es.length}}
+function reportsV(){
+ const types=[["mach","إنتاج ماكينة"],["stage","إنتاج مرحلة"],["allmach","كل الماكينات"],["full","تقرير شامل"]];
+ let h='<div class="card noprint"><div class="st"><h3>📑 التقارير</h3><div class="acts" style="margin:0"><button class="btn l sm" onclick="repCSV()">📄 تنزيل CSV</button><button class="btn l sm" onclick="window.print()">🖨️ طباعة التقرير</button></div></div>'+
+  '<div class="fg"><label class="f">نوع التقرير<select onchange="REP.type=this.value;render()">'+types.map(t=>'<option value="'+t[0]+'"'+(REP.type===t[0]?" selected":"")+'>'+t[1]+"</option>").join("")+"</select></label>"+
+  (REP.type==="mach"?'<label class="f">الخط<select onchange="REP.line=+this.value;REP.mach=LINES[REP.line][0];render()">'+[1,2,3,4].map(n=>'<option value="'+n+'"'+(REP.line===n?" selected":"")+">خط "+n+"</option>").join("")+'</select></label><label class="f">الماكينة<select onchange="REP.mach=this.value;render()">'+LINES[REP.line].map(m=>"<option"+(m===REP.mach?" selected":"")+">"+esc(m)+"</option>").join("")+"</select></label>":"")+
+  (REP.type==="stage"?'<label class="f">المرحلة<select onchange="REP.stage=this.value;render()">'+SEQ.map(k=>'<option value="'+k+'"'+(REP.stage===k?" selected":"")+">"+esc(STD[k].n)+"</option>").join("")+"</select></label>":"")+
+  '<label class="f">من تاريخ<input type="date" value="'+REP.from+'" onchange="REP.from=this.value;render()"></label><label class="f">إلى تاريخ<input type="date" value="'+REP.to+'" onchange="REP.to=this.value;render()"></label></div>'+
+  '<div class="mut">الفترة: '+fmtDate(REP.from)+" ← "+fmtDate(REP.to)+' · الحركات تُنسب للماكينة المسجلة على المرحلة حالياً</div></div>';
+ const rn=(types.find(t=>t[0]===REP.type)||[])[1]||"";
+ h+='<div class="print-title"><h2>متابعة طباعة المشروعات المختلفة</h2><div class="mut">'+esc(rn)+(REP.type==="mach"?" — "+esc(REP.mach):REP.type==="stage"?" — "+esc(STD[REP.stage].n):"")+' · الفترة '+fmtDate(REP.from)+" ← "+fmtDate(REP.to)+"</div></div>";
+ if(REP.type==="mach")h+=repMachHTML();else if(REP.type==="stage")h+=repStageHTML();else if(REP.type==="allmach")h+=repAllHTML();else h+=repFullHTML();
+ return h
+}
+function repMachHTML(){return repDetailHTML(REP.mach,repEntries((o,s)=>s.machine===REP.mach))}
+function repStageHTML(){return repDetailHTML(STD[REP.stage].n,repEntries((o,s)=>s.type===REP.stage))}
+function repDetailHTML(title,es){
+ if(!es.length)return'<div class="card"><div class="empty">لا توجد حركات مسجلة على «'+esc(title)+'» في هذه الفترة</div></div>';
+ let g=0,b=0,w=0;const byD={},byO={};
+ es.forEach(x=>{g+=x.e.g||0;b+=x.e.b||0;w+=x.e.w||0;
+  (byD[x.e.date]=byD[x.e.date]||{g:0,b:0,w:0});byD[x.e.date].g+=x.e.g||0;byD[x.e.date].b+=x.e.b||0;byD[x.e.date].w+=x.e.w||0;
+  (byO[x.o.id]=byO[x.o.id]||{id:x.o.id,no:x.o.no,dn:x.dn,g:0,b:0,w:0});byO[x.o.id].g+=x.e.g||0;byO[x.o.id].b+=x.e.b||0;byO[x.o.id].w+=x.e.w||0});
+ const tot=g+b+w,k=(l,v,col)=>'<div class="kpi" style="--c:'+(col||"var(--acc)")+'"><div class="l">'+l+'</div><div class="v">'+v+"</div></div>";
+ let h='<div class="card"><div class="st"><h3>⚙️ '+esc(title)+'</h3><span class="mut">'+es.length+" حركة</span></div><div class='grid kp'>"+
+  k("✅ سليم",fmt(g),"#059669")+k("⚠️ معيب",fmt(b),"#e11d48")+k("🗑️ تالف",fmt(w),"#d97706")+k("الإجمالي",fmt(tot))+k("% معيب",pct(b,tot)+"%")+k("% تالف",pct(w,tot)+"%")+"</div></div>";
+ h+='<div class="card"><div class="st"><h3>📅 الإنتاج اليومي</h3></div><div class="tw"><table><thead><tr><th>التاريخ</th><th>سليم</th><th>معيب</th><th>تالف</th><th>الإجمالي</th></tr></thead><tbody>'+
+  Object.keys(byD).sort().map(d=>"<tr><td>"+fmtDate(d)+'</td><td class="tg">'+fmt(byD[d].g)+'</td><td class="tb">'+fmt(byD[d].b)+'</td><td class="tw2">'+fmt(byD[d].w)+"</td><td><b>"+fmt(byD[d].g+byD[d].b+byD[d].w)+"</b></td></tr>").join("")+
+  '<tr class="tot"><td>الإجمالي</td><td>'+fmt(g)+"</td><td>"+fmt(b)+"</td><td>"+fmt(w)+"</td><td>"+fmt(tot)+"</td></tr></tbody></table></div></div>";
+ h+='<div class="card"><div class="st"><h3>📦 حسب الأمر</h3></div><div class="tw"><table><thead><tr><th>الأمر</th><th>الفئة</th><th>سليم</th><th>معيب</th><th>تالف</th><th></th></tr></thead><tbody>'+
+  Object.values(byO).map(x=>'<tr><td class="l"><b>'+esc(x.no)+"</b></td><td>"+esc(x.dn)+'</td><td class="tg">'+fmt(x.g)+'</td><td class="tb">'+fmt(x.b)+'</td><td class="tw2">'+fmt(x.w)+'</td><td><button class="btn l sm" onclick="openOrder(\''+x.id+'\')">فتح</button></td></tr>').join("")+"</tbody></table></div></div>";
+ return h
+}
+function machTableHTML(){
+ const rows=allMach().map(({ln,m})=>({ln,m,a:machAgg(m)})).filter(x=>x.a.n>0);
+ if(!rows.length)return'<div class="empty">لا توجد حركات في هذه الفترة</div>';
+ let tg=0,tb=0,tw=0;
+ return'<div class="tw"><table><thead><tr><th>الخط</th><th>الماكينة</th><th>سليم</th><th>معيب</th><th>تالف</th><th>الإجمالي</th><th>% معيب</th><th>% تالف</th></tr></thead><tbody>'+
+  rows.map(x=>{const a=x.a,t=a.g+a.b+a.w;tg+=a.g;tb+=a.b;tw+=a.w;return"<tr><td>خط "+x.ln+'</td><td class="l"><b>'+esc(x.m)+'</b></td><td class="tg">'+fmt(a.g)+'</td><td class="tb">'+fmt(a.b)+'</td><td class="tw2">'+fmt(a.w)+"</td><td><b>"+fmt(t)+"</b></td><td>"+pct(a.b,t)+"%</td><td>"+pct(a.w,t)+"%</td></tr>"}).join("")+
+  '<tr class="tot"><td></td><td>الإجمالي</td><td>'+fmt(tg)+"</td><td>"+fmt(tb)+"</td><td>"+fmt(tw)+"</td><td>"+fmt(tg+tb+tw)+"</td><td></td><td></td></tr></tbody></table></div>"
+}
+function repAllHTML(){return'<div class="card"><div class="st"><h3>⚙️ إنتاج كل الماكينات</h3><span class="mut">'+fmtDate(REP.from)+" ← "+fmtDate(REP.to)+"</span></div>"+machTableHTML()+"</div>"}
+function repFullHTML(){
+ let g=0,b=0,w=0;const byO={};
+ repEntries(()=>true).forEach(x=>{g+=x.e.g||0;b+=x.e.b||0;w+=x.e.w||0;(byO[x.o.id]=byO[x.o.id]||{id:x.o.id,no:x.o.no,dn:x.dn,prj:x.o.project||"",st:x.o.status,g:0,b:0,w:0});byO[x.o.id].g+=x.e.g||0;byO[x.o.id].b+=x.e.b||0;byO[x.o.id].w+=x.e.w||0});
+ let att=0;Object.keys(S.att).forEach(d=>{if(d>=REP.from&&d<=REP.to){const a=S.att[d]||{};att+=num(a.s1)+num(a.s2)+num(a.s3)+num(a.sup)}});
+ const k=(l,v,col)=>'<div class="kpi" style="--c:'+(col||"var(--acc)")+'"><div class="l">'+l+'</div><div class="v">'+v+"</div></div>";
+ let h='<div class="card"><div class="st"><h3>📋 ملخص الفترة</h3><span class="mut">'+fmtDate(REP.from)+" ← "+fmtDate(REP.to)+"</span></div><div class='grid kp'>"+
+  k("✅ سليم",fmt(g),"#059669")+k("⚠️ معيب",fmt(b),"#e11d48")+k("🗑️ تالف",fmt(w),"#d97706")+k("إجمالي الإنتاج",fmt(g+b+w))+k("أوامر جارية",orders().filter(o=>o.status!=="done").length)+k("أوامر مكتملة",orders().filter(o=>o.status==="done").length)+k("👷 مجموع الحضور",fmt(att),"#0891b2")+"</div></div>";
+ const os=Object.values(byO);
+ h+='<div class="card"><div class="st"><h3>📦 الأوامر في الفترة</h3></div>'+(os.length?'<div class="tw"><table><thead><tr><th>الأمر</th><th>الفئة</th><th>المشروع</th><th>الحالة</th><th>سليم</th><th>معيب</th><th>تالف</th><th></th></tr></thead><tbody>'+os.map(x=>'<tr><td class="l"><b>'+esc(x.no)+"</b></td><td>"+esc(x.dn)+"</td><td>"+esc(x.prj||"—")+"</td><td>"+(x.st==="done"?"✔ مكتمل":"جارٍ")+'</td><td class="tg">'+fmt(x.g)+'</td><td class="tb">'+fmt(x.b)+'</td><td class="tw2">'+fmt(x.w)+'</td><td><button class="btn l sm" onclick="openOrder(\''+x.id+'\')">فتح</button></td></tr>').join("")+"</tbody></table></div>":'<div class="empty">لا توجد حركات في هذه الفترة</div>')+"</div>";
+ h+='<div class="card"><div class="st"><h3>⚙️ الماكينات في الفترة</h3></div>'+machTableHTML()+"</div>";
+ const byS={};repEntries(()=>true).forEach(x=>{const n=STD[x.s.type]?STD[x.s.type].n:"—";(byS[n]=byS[n]||{g:0,b:0,w:0});byS[n].g+=x.e.g||0;byS[n].b+=x.e.b||0;byS[n].w+=x.e.w||0});
+ const sr=Object.entries(byS);let sg=0,sb=0,sw=0;
+ h+='<div class="card"><div class="st"><h3>🔀 المراحل في الفترة</h3></div>'+(sr.length?'<div class="tw"><table><thead><tr><th>المرحلة</th><th>سليم</th><th>معيب</th><th>تالف</th><th>الإجمالي</th><th>% معيب</th><th>% تالف</th></tr></thead><tbody>'+sr.map(x=>{const a=x[1],t=a.g+a.b+a.w;sg+=a.g;sb+=a.b;sw+=a.w;return'<tr><td class="l"><b>'+esc(x[0])+'</b></td><td class="tg">'+fmt(a.g)+'</td><td class="tb">'+fmt(a.b)+'</td><td class="tw2">'+fmt(a.w)+'</td><td><b>'+fmt(t)+"</b></td><td>"+pct(a.b,t)+"%</td><td>"+pct(a.w,t)+"%</td></tr>"}).join("")+'<tr class="tot"><td>الإجمالي</td><td>'+fmt(sg)+"</td><td>"+fmt(sb)+"</td><td>"+fmt(sw)+"</td><td>"+fmt(sg+sb+sw)+"</td><td></td><td></td></tr></tbody></table></div>":'<div class="empty">لا توجد حركات في هذه الفترة</div>')+"</div>";
+ return h
+}
+function repCSV(){
+ const q=v=>{let t=String(v==null?"":v);if(/^[=+\-@\t\r]/.test(t))t="'"+t;return'"'+t.replace(/"/g,'""')+'"'},R=[];
+ const period=fmtDate(REP.from)+" - "+fmtDate(REP.to);
+ if(REP.type==="mach"){R.push(["تقرير ماكينة: "+REP.mach+" — "+period]);R.push(["التاريخ","الفترة","الأمر","الفئة","المرحلة","سليم","معيب","تالف","ملاحظة","بواسطة"]);
+  repEntries((o,s)=>s.machine===REP.mach).forEach(x=>R.push([x.e.date,x.e.slot,x.o.no,x.dn,STD[x.s.type]?STD[x.s.type].n:"",x.e.g,x.e.b,x.e.w,x.e.note,x.e.by]))}
+ else if(REP.type==="stage"){R.push(["تقرير مرحلة: "+STD[REP.stage].n+" — "+period]);R.push(["التاريخ","الفترة","الأمر","الفئة","الماكينة","سليم","معيب","تالف","ملاحظة","بواسطة"]);
+  repEntries((o,s)=>s.type===REP.stage).forEach(x=>R.push([x.e.date,x.e.slot,x.o.no,x.dn,x.s.machine,x.e.g,x.e.b,x.e.w,x.e.note,x.e.by]))}
+ else if(REP.type==="allmach"){R.push(["تقرير كل الماكينات — "+period]);R.push(["الخط","الماكينة","سليم","معيب","تالف","الإجمالي","% معيب","% تالف"]);
+  allMach().forEach(({ln,m})=>{const a=machAgg(m);if(!a.n)return;const t=a.g+a.b+a.w;R.push(["خط "+ln,m,a.g,a.b,a.w,t,pct(a.b,t)+"%",pct(a.w,t)+"%"])})}
+ else{R.push(["تقرير شامل — "+period]);R.push([]);R.push(["الأمر","الفئة","المشروع","الحالة","سليم","معيب","تالف"]);
+  const byO={};repEntries(()=>true).forEach(x=>{(byO[x.o.id]=byO[x.o.id]||{no:x.o.no,dn:x.dn,prj:x.o.project||"",st:x.o.status,g:0,b:0,w:0});byO[x.o.id].g+=x.e.g||0;byO[x.o.id].b+=x.e.b||0;byO[x.o.id].w+=x.e.w||0});
+  Object.values(byO).forEach(x=>R.push([x.no,x.dn,x.prj,x.st==="done"?"مكتمل":"جارٍ",x.g,x.b,x.w]));
+  R.push([]);R.push(["الخط","الماكينة","سليم","معيب","تالف","الإجمالي"]);
+  allMach().forEach(({ln,m})=>{const a=machAgg(m);if(!a.n)return;R.push(["خط "+ln,m,a.g,a.b,a.w,a.g+a.b+a.w])})}
+ dl("report-"+REP.type+"-"+todayKey()+".csv","﻿"+R.map(r=>r.map(q).join(",")).join("\r\n"),"text/csv;charset=utf-8");toast("تم تنزيل التقرير","ok")
+}
+
 /* ---------- البيانات ---------- */
 function dataV(){
  const lg=Object.keys(S.log).sort().reverse().slice(0,60),rp=(()=>{try{return JSON.parse(localStorage.getItem(RP))}catch(e){return null}})();
@@ -620,7 +744,7 @@ function usersModal(){
  const us=Object.entries(S.users||{}).filter(([,p])=>p);
  const rows=us.map(([k,p])=>'<tr><td class="l"><b>'+esc(p.name||k)+'</b><small>'+esc(k)+'</small></td><td><select onchange="setRole(\''+k+'\',this.value)">'+["operator","supervisor","admin"].map(r=>'<option value="'+r+'"'+(p.role===r?" selected":"")+'>'+ROLES[r]+"</option>").join("")+'</select></td><td><button class="btn r sm" onclick="delUser(\''+k+'\')">حذف</button></td></tr>').join("");
  openModal("<h3>👥 إدارة المستخدمين</h3><div class='tw'><table style='min-width:440px'><thead><tr><th>المستخدم</th><th>الصلاحية</th><th></th></tr></thead><tbody>"+(rows||'<tr><td colspan="3" class="mut">لا يوجد مستخدمون</td></tr>')+"</tbody></table></div>"+
-  "<h3 style='margin-top:14px'>➕ مستخدم جديد</h3><div class='fg' style='grid-template-columns:1fr 1fr'><label class='f'>اسم المستخدم (إنجليزي، للدخول)<input type='text' id='nu_u' class='ltr' autocapitalize='off' autocomplete='off'></label><label class='f'>الاسم بالعربي (يظهر في الترحيب)<input type='text' id='nu_n' autocomplete='off'></label><label class='f'>كلمة المرور<input type='password' id='nu_p' class='ltr' autocomplete='new-password'></label><label class='f'>الصلاحية<select id='nu_r'><option value='operator'>مشغل — تسجيل الإنتاج والماكينات</option><option value='supervisor'>مشرف — صلاحيات المشغل + الأوامر والفئات</option><option value='admin'>مدير النظام — كل شيء + المستخدمون</option></select></label></div><div class='err' id='ferr'></div><div class='acts'><button class='btn' onclick='addUser()'>إضافة</button><button class='btn l' onclick='closeModal()'>إغلاق</button></div>",true)
+  "<h3 style='margin-top:14px'>➕ مستخدم جديد</h3><div class='fg' style='grid-template-columns:1fr 1fr'><label class='f'>اسم المستخدم (إنجليزي، للدخول)<input type='text' id='nu_u' class='ltr' autocapitalize='off' autocomplete='off'></label><label class='f'>الاسم بالعربي (يظهر في الترحيب)<input type='text' id='nu_n' autocomplete='off'></label><label class='f'>كلمة المرور<input type='password' id='nu_p' class='ltr' autocomplete='new-password'></label><label class='f'>الصلاحية<select id='nu_r'><option value='operator'>مشغل — تسجيل الإنتاج والماكينات</option><option value='supervisor'>مشرف — كل شيء عدا المستخدمين وإعدادات النظام</option><option value='admin'>مدير النظام — كل شيء + المستخدمون</option></select></label></div><div class='err' id='ferr'></div><div class='acts'><button class='btn' onclick='addUser()'>إضافة</button><button class='btn l' onclick='closeModal()'>إغلاق</button></div>",true)
 }
 async function addUser(){
  const u=normD($("nu_u").value).trim().toLowerCase().split("@")[0],n=$("nu_n").value.trim(),p=$("nu_p").value,r=$("nu_r").value;
@@ -643,15 +767,35 @@ async function changePw(){
  catch(x){ferr("تعذر الاتصال بالإنترنت")}
 }
 
+/* ================== الجولة التعريفية ================== */
+const TOUR=[
+ ["👋","أهلاً بيك في نظام متابعة الطباعة","النظام ده بيتتبع أوامر الفئات الجديدة من أول ما توصل لحد ما تتسلّم للتشطيب — سليم ومعيب وتالف، خطوة بخطوة."],
+ ["🧾","1) أنشئ الأمر","من تبويب «الأوامر» دوس «أمر جديد» وسجّل رقم الأمر والفئة والكمية. الأمر بيمشي على مراحل الطباعة بالترتيب المعروض فيه."],
+ ["📝","2) سجّل الإنتاج يوميًا","افتح الأمر وسجّل إنتاج كل مرحلة: سليم ومعيب وتالف — يومي أو بنص يوم. النظام بيحسب الأرصدة ونِسَب المعيب تلقائيًا."],
+ ["🚚","3) استلم الخام وسلّم للتشطيب","سجّل استلام الخام أول ما يوصل. والتسليم للتشطيب ممكن في أي وقت أثناء شغل الأمر — مش لازم يخلص الأول — وكل دفعة بتتسجل من صفحة الأمر. ولما كمية الأمر تكتمل تقدر تقفله من زرار «إقفال الأمر»."],
+ ["📊","4) راقب من اللوحة والتقارير","لوحة المتابعة بتديك صورة سريعة لكل حاجة، وتبويب «التقارير» فيه تقرير لماكينة أو لكل الماكينات أو تقرير شامل — وتنزّله CSV."],
+ ["💾","5) بياناتك محفوظة","من تبويب «البيانات» اعمل نسخة احتياطية في أي وقت. ولو النظام سحابي، مدير النظام يقدر يضيف المستخدمين ويحدّد صلاحياتهم."]
+];
+let TSTEP=0;
+function tour(i){TSTEP=i;const s=TOUR[TSTEP];openModal("<div style='text-align:center'><div style='font-size:46px;line-height:1'>"+s[0]+"</div><h3 style='margin:12px 0 6px'>"+s[1]+"</h3><p class='mut' style='font-size:14px;line-height:2;margin:0 0 16px'>"+s[2]+"</p>"+
+ "<div style='display:flex;justify-content:center;gap:6px;margin-bottom:18px'>"+TOUR.map(function(x,k){return "<span style='width:"+(k===TSTEP?"20px":"8px")+";height:8px;border-radius:99px;background:"+(k===TSTEP?"var(--acc)":"var(--line)")+";transition:all .2s'></span>"}).join("")+"</div>"+
+ "<div class='acts' style='justify-content:center'>"+
+ (TSTEP>0?"<button class='btn l' onclick='tour("+(TSTEP-1)+")'>السابق</button>":"")+
+ (TSTEP<TOUR.length-1?"<button class='btn' onclick='tour("+(TSTEP+1)+")'>التالي</button>":"<button class='btn g' onclick='tourDone()'>يلا نبدأ 🚀</button>")+
+ "<button class='btn l' onclick='tourDone()'>تخطي</button>"+
+ "</div></div>")}
+function tourDone(){try{localStorage.setItem("pt_tour2","1")}catch(e){}closeModal()}
+function maybeTour(){let seen=false;try{seen=!!localStorage.getItem("pt_tour2")}catch(e){}if(!seen&&(!CLOUD||me))setTimeout(function(){tour(0)},500)}
+
 /* ================== بدء التشغيل ================== */
 (async function start(){
  if(CLOUD){
   try{const t=JSON.parse(sg("pt_tok")||"null");if(t&&t.refresh){tok=t;me={name:String(t.email||"").split("@")[0]}}}catch(e){}
-  render();if(tok){await pull();if(tok&&!resolveMe()){logout();openModal("<h3>⛔ الحساب غير مفعّل</h3><p>تواصل مع مدير النظام عشان يضيف حسابك.</p><div class='acts'><button class='btn' onclick='closeModal()'>حسناً</button></div>");return}render();if(me)toast("مرحباً "+me.name,"ok")}
+  render();if(tok){await pull();if(tok&&!resolveMe()){logout();openModal("<h3>⛔ الحساب غير مفعّل</h3><p>تواصل مع مدير النظام عشان يضيف حسابك.</p><div class='acts'><button class='btn' onclick='closeModal()'>حسناً</button></div>");return}render();if(me)toast("مرحباً "+me.name,"ok");maybeTour()}
   setInterval(async()=>{if(tok&&!writing&&!Object.keys(pending).length){await pull();if(!typing())render()}},12000)
  }else{
   try{const s=localStorage.getItem(LS);if(s)S=norm(JSON.parse(s))}catch(e){S=blank()}
-  render()
+  render();maybeTour()
  }
 })();
 </script>
